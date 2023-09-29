@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gif Generator</title>
+</head>
+<body>
+  <input type="text" id="search" placeholder="Search a Gif...">
+  <button type="submit" onclick="getGif()">Search</button><br><br>
+  <img src="#">
+  <script>
+    function getGif() {
+      const img = document.querySelector('img');
+      const search_img = document.getElementById("search").value
+      fetch(`https://api.giphy.com/v1/gifs/translate?api_key=ysCfCBhgCfpbZpKdQ3usjWejPid6BqY1&s=${search_img}`, {mode: 'cors'})
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          img.src = response.data.images.original.url;
+        })
+        .catch(e => {
+          console.log(e)
+        });
+    }
+
+  </script>
+</body>
+</html>
